@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.it15301.entity.User;
 
@@ -22,10 +23,16 @@ public class HelloController {
 		return "hello";
 	}
 	
-//	@ResponseBody
 	@GetMapping("/test")
 	public String test()
 	{
 		return "forward:/hello";
+	}
+
+	@ResponseBody
+	@GetMapping("/demo-api")
+	public String demoApi()
+	{
+		return "Ko học lại";
 	}
 }

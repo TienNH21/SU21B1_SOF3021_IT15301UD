@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <title>Insert title here</title>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bootstrap.min.css" ></link>
 </head>
@@ -27,68 +28,59 @@
 	</nav>
 
 	<div class="mt-5 col-10 offset-1">
-		<form
+		<form:form
+			modelAttribute="user"
 			method="POST"
 			action="${ pageContext.request.contextPath }/admin/users/update/1">
 			<input type="hidden" name="_method" value="put" />
 			<div class="form-group mt-3">
 				<label for="name">Name</label>
-			    <input value="${ user.name }" type="text" class="form-control" id="name" name="name" autocomplete="off">
-			    <small id="name_error" class="form-text text-danger"></small>
+			    <form:input path="name" class="form-control" id="name" name="name" autocomplete="off" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
-			    <input value="${ user.email }" type="email" class="form-control" id="email" name="email" autocomplete="off">
-			    <small id="email_error" class="form-text text-danger"></small>
+			    <form:input path="email" class="form-control" id="email" name="email" autocomplete="off" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="password">Password</label>
-				<input value="${ user.password }" type="hidden" name="password"/>
-			    <input value="${ user.password }" type="password" class="form-control" id="password" autocomplete="off" disabled>
-			    <small id="password_error" class="form-text text-danger"></small>
+				<form:password path="password" value="*********" name="password" class="form-control" disabled="true"/>
 			</div>
 			<div class="form-group mt-3">
 				<label for="dob">Date of Birth</label>
-			    <input value="${ user.dob }" type="text" class="form-control" id="dob" name="dob" autocomplete="off">
-			    <small id="dob_error" class="form-text text-danger"></small>
+ 			    <%-- <form:input type="date" path="dob" class="form-control" id="dob" name="dob" autocomplete="off" /> --%>
 			</div>
 			<div class="form-group mt-3">
 				<label for="role">Role</label>
-				<select name="role" id="role" class="form-control" required>
-					<option selected disabled>Choose</option>
-					<option value="1" ${ user.role == 1 ? "selected" : "" }>User</option>
-					<option value="2" ${ user.role == 2 ? "selected" : "" }>Admin</option>
-				</select>
-			    <small id="role_error" class="form-text text-danger"></small>
+				<form:select path="role" id="role" class="form-control">
+					<form:option value="1">Sinh Viên</form:option>
+					<form:option value="2">Giảng Viên</form:option>
+					<form:option value="3">PDT</form:option>
+					<form:option value="4">CNBM</form:option>
+				</form:select>
 			</div>
 			<div class="form-group mt-3">
 				<label for="avatar">Image</label>
-			    <input type="file" value="${ user.avatar }" class="form-control" id="avatar" name="avatar">
-			    <small id="avatar_error" class="form-text text-danger"></small>
+			    <input type="file" class="form-control" id="avatar" name="avatar">
 			</div>
 			<div class="form-group mt-3">
 				<label for="gender">Gender</label>
-				<select name="gender" id="gender" class="form-control" required>
-					<option selected disabled>Choose</option>
-					<option value="1" ${ user.gender == 1 ? "selected" : "" }>Male</option>
-					<option value="2" ${ user.gender == 2 ? "selected" : "" }>Female</option>
-				</select>
-			    <small id="gender_error" class="form-text text-danger"></small>
+				<form:select path="gender" id="gender" class="form-control">
+					<form:option value="1">Male</form:option>
+					<form:option value="2">Female</form:option>
+				</form:select>
 			</div>
 			<div class="form-group mt-3">
 				<label for="status">Status</label>
-				<select name="status" id="status" class="form-control" required>
-					<option selected disabled>Choose</option>
-					<option value="1" ${ user.status == 1 ? "selected" : "" }>Active</option>
-					<option value="2" ${ user.status == 2 ? "selected" : "" }>Inactive</option>
-				</select>
-			    <small id="status_error" class="form-text text-danger"></small>
+				<form:select path="status" id="status" class="form-control">
+					<form:option value="1">Active</form:option>
+					<form:option value="2">Inactive</form:option>
+				</form:select>
 			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>
 				<button type="reset" class="btn btn-danger">Clear</button>
 			</div>
-		</form>
+		</form:form>
 	</div>
 </body>
 </html>
