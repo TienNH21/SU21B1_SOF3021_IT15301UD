@@ -1,13 +1,17 @@
 package com.it15301.controller.admin;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.SpringVersion;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,17 +19,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.it15301.model.User;
+import com.it15301.dto.User;
+import com.it15301.repositories.UserRepository;
 
 @Controller
 @RequestMapping(value="/admin/users")
 public class UserController {
 	@Autowired
 	private HttpServletRequest request;
+	
+	@Autowired
+	private UserRepository userRepo;
 
 	@GetMapping()
-	public String index()
+	public String index(Model model)
 	{
+		List<com.it15301.entity.User> listUser = this.userRepo.findAll();
+		
+		model.addAttribute("listUser", listUser);
+		
 		return "admin/users/index";
 	}
 
@@ -78,10 +90,19 @@ public class UserController {
 
 	@PostMapping(value="/update/{id}")
 	public String update(
-		User user
+		Model model,
+		@Valid User user,
+		BindingResult result
 	) {
-		System.out.println("Email:" + user.getEmail());
-		return "redirect:/admin/users";
+		if (result.hasErrors()) {
+			System.out.println("Có lỗi");
+//			return "redirect:/admin/users/edit/1";
+			model.addAttribute("errors", result.getAllErrors());
+			return "admin/users/edit";
+		} else {
+			System.out.println("Ko Có lỗi");
+			return "redirect:/admin/users";
+		}
 	}
 
 	@PostMapping(value="/delete/{id}")

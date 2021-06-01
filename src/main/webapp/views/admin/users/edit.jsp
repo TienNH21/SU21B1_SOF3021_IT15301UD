@@ -36,14 +36,17 @@
 			<div class="form-group mt-3">
 				<label for="name">Name</label>
 			    <form:input path="name" class="form-control" id="name" name="name" autocomplete="off" />
+				<form:errors path="name" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="email">Email</label>
 			    <form:input path="email" class="form-control" id="email" name="email" autocomplete="off" />
+				<form:errors path="email" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="password">Password</label>
 				<form:password path="password" value="*********" name="password" class="form-control" disabled="true"/>
+				<form:errors path="password" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="dob">Date of Birth</label>
@@ -57,6 +60,7 @@
 					<form:option value="3">PDT</form:option>
 					<form:option value="4">CNBM</form:option>
 				</form:select>
+				<form:errors path="role" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="avatar">Image</label>
@@ -68,6 +72,7 @@
 					<form:option value="1">Male</form:option>
 					<form:option value="2">Female</form:option>
 				</form:select>
+				<form:errors path="gender" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<label for="status">Status</label>
@@ -75,6 +80,7 @@
 					<form:option value="1">Active</form:option>
 					<form:option value="2">Inactive</form:option>
 				</form:select>
+				<form:errors path="status" element="span" cssClass="text-danger" />
 			</div>
 			<div class="form-group mt-3">
 				<button class="btn btn-primary">Submit</button>

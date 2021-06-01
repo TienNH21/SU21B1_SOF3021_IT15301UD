@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
 <link rel="stylesheet" href="${ pageContext.request.contextPath }/css/bootstrap.min.css" ></link>
 </head>
 <body>
@@ -36,32 +37,33 @@
 				<thead>
 					<tr>
 						<td>Id</td>
-						<td>Họ tên</td>
-						<td>Mã SV</td>
-						<td>Avatar</td>
-						<td>Chuyên ngành</td>
+						<td>Username</td>
+						<td>Email</td>
+						<td>Tài khoản</td>
 						<td colspan="2">Thao tác</td>
 					</tr>
 				</thead>
 				
 				<tbody>
+				<c:forEach items="${ listUser }" var="user">
 					<tr>
-						<td>1</td>
-						<td>Nguyễn Văn A</td>
-						<td>PH12345</td>
-						<td>Ko có</td>
-						<td>UDPM</td>
-						<td>
-							<a
-								class="btn btn-primary"
-								href="${ pageContext.request.contextPath }/admin/users/edit/1">Update</a>
-						</td>
-						<td>
-							<form action="${ pageContext.request.contextPath }/admin/users/delete/1" method="POST">
-								<button class="btn btn-danger">Delete</button>
-							</form>
-						</td>
-					</tr>
+							<td>${ user.id }</td>
+							<td>${ user.username }</td>
+							<td>${ user.email }</td>
+							<td>${ user.admin == 1 ? "Admin" : "User" }</td>
+							<td>${ user.id }</td>
+							<td>
+								<a
+									class="btn btn-primary"
+									href="${ pageContext.request.contextPath }/admin/users/edit/1">Update</a>
+							</td>
+							<td>
+								<form action="${ pageContext.request.contextPath }/admin/users/delete/1" method="POST">
+									<button class="btn btn-danger">Delete</button>
+								</form>
+							</td>
+						</tr>
+				</c:forEach>
 				</tbody>
 			</table>
 	</div>
