@@ -4,26 +4,26 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
-import com.it15301.dto.User;
+import com.it15301.dto.UserDTO;
 
 @Configuration
 public class MultipleBeanConfig {
 	@Bean("beanTienNH21")
-	public User getUser1()
+	public UserDTO getUser1()
 	{
-		User myUser = new User();
+		UserDTO myUser = new UserDTO();
 		
-		myUser.setName("TienNH21");
+		myUser.setUsername("TienNH21");
 		
 		return myUser;
 	}
 
 	@Bean("beanDungNA29")
-	public User getUser2()
+	public UserDTO getUser2()
 	{
-		User myUser = new User();
+		UserDTO myUser = new UserDTO();
 		
-		myUser.setName("DungNA29");
+		myUser.setUsername("DungNA29");
 		
 		return myUser;
 	}
