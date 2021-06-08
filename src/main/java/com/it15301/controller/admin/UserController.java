@@ -29,6 +29,7 @@ import com.it15301.dto.UserDTO;
 import com.it15301.entity.User;
 import com.it15301.mappers.UserMapper;
 import com.it15301.repositories.UserRepository;
+import com.it15301.utilities.HashUtil;
 
 @Controller
 @RequestMapping(value="/admin/users")
@@ -94,6 +95,10 @@ public class UserController {
 			return "admin/users/create";
 		} else {
 			User entity = this.mapper.convertToEntity(user);
+
+			String hashedPassword = HashUtil.hash(entity.getPassword());
+			entity.setPassword(hashedPassword);
+
 			this.userRepo.save(entity);
 			return "redirect:/admin/users";
 		}
@@ -116,10 +121,8 @@ public class UserController {
 		BindingResult result
 	) {
 		if (result.hasErrors()) {
-			System.out.println("Có lỗi");
 //			return "redirect:/admin/users/edit/1";
 			model.addAttribute("errors", result.getAllErrors());
-			System.out.println(result.getAllErrors().get(0));
 			model.addAttribute("user", user);
 			return "admin/users/edit";
 		} else {
